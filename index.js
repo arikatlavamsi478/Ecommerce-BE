@@ -3,16 +3,19 @@ const fastify = require('fastify')({
   logger: true,
 });
 
-// Declare a route
-//fastify.get("/", const handler = (request, reply) =>
-// reply.send({ hello: "world" });
+/* 
+ // Declare a route in express 
+fastify.get("/", const handler = (request, reply) =>
+reply.send({ hello: "world" });
+ */
+
+// Declare route in fastify way
 fastify.get('/', (request, reply) => {
   reply.send({ hello: 'world' });
 });
 
 fastify.get('/api/healthchecker', (request, reply) => {
   reply.status(200).send({
-    //reply.status(200).send({
     status: 'success',
     message: 'Build CRUD API with Node.js and Sequelize',
   });
@@ -21,8 +24,6 @@ fastify.get('/api/healthchecker', (request, reply) => {
 fastify.all('*', (request, reply) => {
   reply.status(404).send({
     status: 'fail',
-    // message: "Route does not exist on this server",
-    // message: `Route: ${request.raw.url} does not exist on this server`,
     message: `Route: ${request.raw.url} does   not exist on this server`,
   });
 });
